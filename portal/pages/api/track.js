@@ -4,7 +4,7 @@ const handler = async (req, res) => {
   if (req.method === "POST") {
     try {
       const { captcha, captchaToken } = req.body;
-      const responseObjectCaptcha = await captchaVerify(captcha, captchaToken);
+      await captchaVerify(captcha, captchaToken);
       const { id } = req.body;
       const responseObject = await startFetchTrackDevice(id);
       if (responseObject?.errors) {
@@ -36,15 +36,15 @@ const handler = async (req, res) => {
   }
 };
 
-function maskPhoneNumber(array) {
+const maskPhoneNumber = (array) => {
   const obj = array[0];
   let { phone_number } = obj;
   phone_number = `******${phone_number.slice(6)}`;
   obj.phone_number = phone_number;
   return obj;
-}
+};
 
-async function captchaVerify(captcha, captchaToken) {
+const captchaVerify = async (captcha, captchaToken) => {
   const result = await axios({
     method: "POST",
     url: `${process.env.NEXT_PUBLIC_CAPTCHA_URL}`,
@@ -55,9 +55,9 @@ async function captchaVerify(captcha, captchaToken) {
   });
 
   return result;
-}
+};
 
-async function fetchGraphQL(operationsDoc, operationName, variables) {
+const fetchGraphQL = async (operationsDoc, operationName, variables) => {
   const result = await axios({
     method: "POST",
     headers: {
@@ -72,7 +72,7 @@ async function fetchGraphQL(operationsDoc, operationName, variables) {
   });
 
   return await result;
-}
+};
 
 const operationsDoc = `
     query trackDevice($trackingKey: String) {
@@ -87,16 +87,16 @@ const operationsDoc = `
     }
   `;
 
-function fetchTrackDevice(trackingKey) {
+const fetchTrackDevice = (trackingKey) => {
   return fetchGraphQL(operationsDoc, "trackDevice", {
     trackingKey: trackingKey,
   });
-}
+};
 
-async function startFetchTrackDevice(trackingKey) {
+const startFetchTrackDevice = async (trackingKey) => {
   const response = await fetchTrackDevice(trackingKey);
 
   return response.data;
-}
+};
 
 export default handler;

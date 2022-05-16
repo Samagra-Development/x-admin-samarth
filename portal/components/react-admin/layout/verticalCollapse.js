@@ -10,6 +10,7 @@ import clsx from "clsx";
 import VerticalItem from "./verticalItem";
 import KeyboardArrowDownIcon from "@material-ui/icons/KeyboardArrowDown";
 import KeyboardArrowUpIcon from "@material-ui/icons/KeyboardArrowUp";
+import PropTypes from "prop-types";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -65,7 +66,7 @@ const needsToBeOpened = (location, item) => {
   return location && isUrlInChildren(item, location.pathname);
 };
 
-function VerticalCollapse({ activePath, ...props }) {
+const VerticalCollapse = ({ activePath, ...props }) => {
   const [open, setOpen] = useState(() =>
     needsToBeOpened(window.location, props.item)
   );
@@ -81,9 +82,9 @@ function VerticalCollapse({ activePath, ...props }) {
     }
   }, [item]);
 
-  function handleClick() {
+  const handleClick = () => {
     setOpen(!open);
-  }
+  };
 
   return (
     <ul className={clsx(classes.root, open && "open")}>
@@ -129,7 +130,6 @@ function VerticalCollapse({ activePath, ...props }) {
                   item={i}
                   publicity={publicity}
                   nestedLevel={props.nestedLevel + 1}
-                  permissions={permissions}
                 />
               );
             }
@@ -146,6 +146,13 @@ function VerticalCollapse({ activePath, ...props }) {
       )}
     </ul>
   );
-}
+};
+
+VerticalCollapse.propTypes = {
+  item: PropTypes.object,
+  nestedLevel: PropTypes.number,
+  activePath: PropTypes.string,
+  publicity: PropTypes.any,
+};
 
 export default VerticalCollapse;

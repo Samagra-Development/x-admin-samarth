@@ -38,7 +38,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const AppBarCustom = (props) => {
+const AppBarCustom = () => {
   const classes = useStyles();
   const dispatch = useDispatch();
   const open = useSelector((state) => state.admin.ui.sidebarOpen);

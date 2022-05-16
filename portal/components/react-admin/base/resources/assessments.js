@@ -13,6 +13,7 @@ import { useMediaQuery } from "@material-ui/core";
 import config from "@/components/config";
 import axios from "axios";
 import { useStyles } from "../styles";
+import PropTypes from "prop-types";
 
 const DevicesFilter = (props) => {
   const classes = useStyles();
@@ -145,7 +146,7 @@ export const AssessmentsEdit = (props) => {
         `${process.env.NEXT_PUBLIC_ASSESSMENTS_MODULE_FORM_URL}/getFormPrefilled/${props.id}`
       )
       .then((res) => setFormUrl(res))
-      .catch((err) => {});
+      .catch(() => {});
   }, []);
   return (
     <>
@@ -169,4 +170,14 @@ export const AssessmentsEdit = (props) => {
       )}
     </>
   );
+};
+
+AssessmentsCreate.propTypes = {
+  options: PropTypes.object,
+  id: PropTypes.number,
+};
+
+AssessmentsEdit.propTypes = {
+  options: PropTypes.object,
+  id: PropTypes.number,
 };

@@ -1,5 +1,5 @@
 import axios from "axios";
-import { getSession, session } from "next-auth/client";
+import { getSession } from "next-auth/client";
 
 const handler = async (req, res) => {
   const session = await getSession({ req });

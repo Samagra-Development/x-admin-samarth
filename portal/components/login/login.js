@@ -1,11 +1,12 @@
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { useToasts } from "react-toast-notifications";
 import { getSession, signIn } from "next-auth/client";
 import { useRouter } from "next/router";
 import controls from "./form.config";
 import styles from "../../styles/Login.module.css";
+import PropTypes from "prop-types";
 
-export default function Login(props) {
+const Login = (props) => {
   const { persona } = props;
   const [input, setInput] = useState({});
 
@@ -19,7 +20,6 @@ export default function Login(props) {
   );
   const [formValidity, setFormValidity] = useState(false);
   const { addToast } = useToasts();
-  const [role, setRole] = useState(null);
 
   const handleInput = (e) => {
     setInput({ ...input, [e.target.name]: e.target.value });
@@ -53,6 +53,7 @@ export default function Login(props) {
     if (url) {
       const session = await getSession();
       if (!router.isFallback) {
+        console.log("Role:",session.role);
         if (session?.role == "Admin") {
           router.push(
             persona.redirectUrl.search("http") < 0
@@ -102,4 +103,18 @@ export default function Login(props) {
       </form>
     </div>
   );
-}
+};
+
+Login.propTypes = {
+  persona: PropTypes.shape({
+    consonant: PropTypes.bool,
+    en: PropTypes.string,
+    hi: PropTypes.string,
+    credentials: PropTypes.string,
+    applicationId: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+    redirectUrl: PropTypes.string,
+    redirectUrlAdmin: PropTypes.string,
+  }).isRequired,
+};
+
+export default Login;

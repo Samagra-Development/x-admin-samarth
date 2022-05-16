@@ -1,5 +1,4 @@
 import axios from "axios";
-import { getSession, session } from "next-auth/client";
 
 const handler = async (req, res) => {
   if (req.method === "POST") {
@@ -24,13 +23,11 @@ const handler = async (req, res) => {
       }
       return true;
     } catch (err) {
-      res
-        .status(500)
-        .json({
-          errors: "Captcha service unavailable",
-          success: null,
-          err: err,
-        });
+      res.status(500).json({
+        errors: "Captcha service unavailable",
+        success: null,
+        err: err,
+      });
       return true;
     }
   }

@@ -1,4 +1,5 @@
 import dynamic from "next/dynamic";
+import React from "react";
 import { useSession } from "next-auth/client";
 import Login from "./login";
 

@@ -1,5 +1,4 @@
 import axios from "axios";
-import { getSession, session } from "next-auth/client";
 
 const handler = async (req, res) => {
   if (req.method === "POST") {
