@@ -3,40 +3,30 @@ import {
   List,
   SimpleList,
   Datagrid,
-  DateField,
   TextField,
-  BooleanField,
-  FunctionField,
   Edit,
   SimpleForm,
-  TextInput,
   SelectInput,
   Filter,
-  SearchInput,
   useRedirect,
   useNotify,
-  FormDataConsumer,
-  AutocompleteInput,
-  ReferenceInput,
-  ChipField,
 } from "react-admin";
 
 import { useSession } from "next-auth/client";
-import { Typography, useMediaQuery, Chip } from "@material-ui/core";
+import { useMediaQuery, Chip } from "@material-ui/core";
 import EditNoDeleteToolbar from "../components/EditNoDeleteToolbar";
 import BackButton from "../components/BackButton";
 import config from "@/components/config";
 import sendSMS from "@/utils/sendSMS";
-import buildGupshup from "@/utils/buildGupshup";
 import { useStyles } from "../styles";
+import PropTypes from "prop-types";
 
-const getChoice = (choices, id) => {
-  return choices?.find((elem) => elem.id === id);
-};
+// const getChoice = (choices, id) => {
+//   return choices?.find((elem) => elem.id === id);
+// };
 
 const DevicesFilter = (props) => {
   const classes = useStyles();
-  const isSmall = useMediaQuery((theme) => theme.breakpoints.down("sm"));
   return (
     <Filter {...props} className={classes.filter}>
       <SelectInput
@@ -117,6 +107,11 @@ export const TeacherList = (props) => {
       )}
     </List>
   );
+};
+
+TeacherList.propTypes = {
+  record: PropTypes.array,
+  source: PropTypes.string,
 };
 
 export const TeacherEdit = (props) => {
@@ -216,4 +211,11 @@ export const TeacherEdit = (props) => {
       </Edit>
     </div>
   );
+};
+
+TeacherEdit.propTypes = {
+  mutationMode: PropTypes.string,
+  basePath: PropTypes.string,
+  record: PropTypes.object,
+  history: PropTypes.any,
 };

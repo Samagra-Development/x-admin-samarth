@@ -8,18 +8,16 @@ import {
   DateField,
   SelectInput,
   SearchInput,
-  ReferenceInput,
-  AutocompleteInput,
-  DateInput,
   Filter,
+  TextInput,
 } from "react-admin";
 import { useMediaQuery } from "@material-ui/core";
 import { useStyles } from "../styles";
 
 // school renderer
-const schoolRenderer = (choice) => {
-  return choice ? `UDISE: ${choice.udise}, ${choice.name}` : "";
-};
+// const schoolRenderer = (choice) => {
+//   return choice ? `UDISE: ${choice.udise}, ${choice.name}` : "";
+// };
 
 const SearchFilter = (props) => (
   <Filter {...props}>

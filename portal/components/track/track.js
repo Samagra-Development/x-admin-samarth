@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { useState, useRef, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import styles from "../../styles/Track.module.css";
 import controls from "./track.config";
 import axios from "axios";
@@ -16,7 +16,6 @@ const Track = () => {
   const [trackingResponse, setTrackingResponse] = useState(null);
   const [deliveryStatus, setDeliveryStatus] = useState(false);
   const [displayCertificate, setDisplayCertificate] = useState(false);
-  const captchaRef = useRef(null);
 
   useEffect(() => {
     const obj = config.statusChoices.find(
@@ -45,7 +44,7 @@ const Track = () => {
   const { addToast } = useToasts();
 
   useEffect(() => {
-    const response = axios
+    axios
       .get(process.env.NEXT_PUBLIC_CAPTCHA_URL)
       .then((resp) => {
         const { blob } = resp.data;

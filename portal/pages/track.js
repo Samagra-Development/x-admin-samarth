@@ -1,9 +1,8 @@
-import Image from "next/image";
-import { useState, useEffect } from "react";
+import React from "react";
 import Layout from "../components/layout";
 import Track from "../components/track/track";
 
-const TrackWrapper = (props) => {
+const TrackWrapper = () => {
   return (
     <Layout>
       <Track></Track>

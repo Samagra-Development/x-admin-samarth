@@ -3,31 +3,23 @@ import {
   List,
   SimpleList,
   Datagrid,
-  DateField,
   TextField,
-  BooleanField,
   FunctionField,
   Edit,
   SimpleForm,
-  TextInput,
-  SelectInput,
-  Filter,
-  SearchInput,
   useRedirect,
   useNotify,
-  FormDataConsumer,
-  AutocompleteInput,
-  ReferenceInput,
 } from "react-admin";
 
 import { useSession } from "next-auth/client";
-import { Typography, useMediaQuery } from "@material-ui/core";
+import { useMediaQuery } from "@material-ui/core";
 import EditNoDeleteToolbar from "../components/EditNoDeleteToolbar";
 import BackButton from "../components/BackButton";
 import config from "@/components/config";
 import sendSMS from "@/utils/sendSMS";
 import buildGupshup from "@/utils/buildGupshup";
 import { useStyles } from "../styles";
+import PropTypes from "prop-types";
 
 /**
  * Donate Device Request List
@@ -157,4 +149,11 @@ export const SchoolEdit = (props) => {
       </Edit>
     </div>
   );
+};
+
+SchoolEdit.propTypes = {
+  mutationMode: PropTypes.string,
+  basePath: PropTypes.string,
+  record: PropTypes.object,
+  history: PropTypes.any,
 };

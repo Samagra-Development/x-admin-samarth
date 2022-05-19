@@ -1,9 +1,10 @@
 import Head from "next/head";
 import Image from "next/image";
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import styles from "../styles/layout.module.css";
+import PropTypes from "prop-types";
 
-const Layout = ({ children, home }) => {
+const Layout = ({ children }) => {
   const transitionStages = {
     FADE_OUT: "fadeOut",
     FADE_IN: "fadeIn",
@@ -15,6 +16,7 @@ const Layout = ({ children, home }) => {
   );
 
   const compareElem = (a, b) => {
+    console.log("A  B ele:", a, b);
     return a.type.name === b.type.name;
   };
 
@@ -81,4 +83,8 @@ const Layout = ({ children, home }) => {
   );
 };
 
-export default Layout;
+Layout.propTypes = {
+  children: PropTypes.node,
+};
+
+export default Layout;  

@@ -1,4 +1,5 @@
 import Link from "next/link";
+import React from "react";
 import { useSession } from "next-auth/client";
 import Layout from "../components/layout";
 import Login from "./login";
